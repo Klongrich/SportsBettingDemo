@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/SportsBettingDemo/static/css/main.5f361e03.chunk.css",
-    "main.js": "/SportsBettingDemo/static/js/main.aff774eb.chunk.js",
-    "main.js.map": "/SportsBettingDemo/static/js/main.aff774eb.chunk.js.map",
+    "main.js": "/SportsBettingDemo/static/js/main.9b2b9f6e.chunk.js",
+    "main.js.map": "/SportsBettingDemo/static/js/main.9b2b9f6e.chunk.js.map",
     "runtime-main.js": "/SportsBettingDemo/static/js/runtime-main.97c27446.js",
     "runtime-main.js.map": "/SportsBettingDemo/static/js/runtime-main.97c27446.js.map",
     "static/js/2.20140a71.chunk.js": "/SportsBettingDemo/static/js/2.20140a71.chunk.js",
     "static/js/2.20140a71.chunk.js.map": "/SportsBettingDemo/static/js/2.20140a71.chunk.js.map",
     "index.html": "/SportsBettingDemo/index.html",
-    "precache-manifest.5c1a47f4088df0a796f5bcf25145a3bc.js": "/SportsBettingDemo/precache-manifest.5c1a47f4088df0a796f5bcf25145a3bc.js",
+    "precache-manifest.a9a6b41db338e5200cbc88da2cd300a0.js": "/SportsBettingDemo/precache-manifest.a9a6b41db338e5200cbc88da2cd300a0.js",
     "service-worker.js": "/SportsBettingDemo/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/SportsBettingDemo/static/css/main.5f361e03.chunk.css.map",
     "static/js/2.20140a71.chunk.js.LICENSE.txt": "/SportsBettingDemo/static/js/2.20140a71.chunk.js.LICENSE.txt",
@@ -18,6 +18,6 @@
     "static/js/runtime-main.97c27446.js",
     "static/js/2.20140a71.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.aff774eb.chunk.js"
+    "static/js/main.9b2b9f6e.chunk.js"
   ]
 }
