@@ -6,6 +6,8 @@ import NavBar from './Navbar'
 
 const Container = styled.div`
 
+    margin-top: -100px;
+
     border: 2px solid white;
     border-radius: 10px;
 
@@ -43,6 +45,7 @@ const BetContainer = styled.div`
     &:hover {
         color: white;
         opacity: 1;
+        cursor: pointer;
     }
 
 `
@@ -71,6 +74,7 @@ const BetButton = styled.div`
     &:hover {
         color: white;
         opacity: 1;
+        cursor: pointer;
     }
 
 `
