@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from "styled-components";
 
+import NavBar from './Navbar'
+
 
 const Container = styled.div`
 
@@ -64,7 +66,7 @@ const BetButton = styled.div`
 
     margin-top: 123px;
     padding-top: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 14px;
 
     &:hover {
         color: white;
@@ -81,7 +83,7 @@ export default function Homepage() {
             <ul>
                 <li>Browns vs Stealers</li>
                 <li>Team One:</li>
-                <li>Team Two:</li>
+                <li Style="margin-top: 10px;">Team Two:</li>
             </ul>
 
             <ul>
@@ -109,7 +111,7 @@ export default function Homepage() {
             </ul>
 
             <BetButton>
-                Bet
+                Place Bet
             </BetButton>
         </Container>
         </>
