@@ -56,30 +56,31 @@ export default function Navbar() {
         }
 
         async function getWalletData () {
-      
-            const web3 = window.web3
 
-            const accounts = await web3.eth.getAccounts()
-            const address = {account: accounts[0]}.account;
-
-            setPublicKey(address);
-
-            if (address) {
-              web3.eth.getBalance(address, function (error, wei) {
-                if (!error) {
-                    var balance = web3.utils.fromWei(wei, 'ether');
-                    setWalletBalance(balance.substring(0,4));
-                    console.log(balance + " ETH");
-                }
-              });
-            }
-          }
-
-          var wallet = loadWeb3();
+            var wallet = await loadWeb3();
           
-          if (wallet) {
-            getWalletData();
-          }
+            if (wallet) {
+                const web3 = window.web3
+
+                const accounts = await web3.eth.getAccounts()
+                const address = {account: accounts[0]}.account;
+
+                setPublicKey(address);
+
+                if (address) {
+                
+                    web3.eth.getBalance(address, function (error, wei) {
+                        if (!error) {
+                            var balance = web3.utils.fromWei(wei, 'ether');
+                            setWalletBalance(balance.substring(0,4));
+                            console.log(balance + " ETH");
+                        }  
+                    });
+                }
+            }
+        }
+          
+        getWalletData();
 
     }, [])
 
