@@ -1,5 +1,7 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
+
+import Web3 from 'web3';
 
 import NavBar from './Navbar'
 
@@ -81,11 +83,13 @@ const BetButton = styled.div`
 
 export default function Homepage() {
 
+
+
     return (
         <>
         <Container>
             <ul>
-                <li>Browns vs Stealers</li>
+                <li>Browns vs Stealers </li>
                 <li>Team One:</li>
                 <li Style="margin-top: 10px;">Team Two:</li>
             </ul>
