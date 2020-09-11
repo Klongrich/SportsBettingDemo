@@ -3,6 +3,30 @@ import styled from "styled-components";
 
 import Web3 from 'web3';
 
+const API_KEY = 'SGJRWYUZK9QJH2UUQ96JKTZAY4RAPIB5PK';
+const PUBlIC_KEY = '0x3F5AA308D0D27fD80479dbcD1012c8254da45820';
+const ACTION = 'txlist'
+
+//Minimum ABI to get ERC20 Token balance
+var ERC_20_ABI = [
+  // balanceOf
+  {
+    "constant":true,
+    "inputs":[{"name":"_owner","type":"address"}],
+    "name":"balanceOf",
+    "outputs":[{"name":"balance","type":"uint256"}],
+    "type":"function"
+  },
+  // decimals
+  {
+    "constant":true,
+    "inputs":[],
+    "name":"decimals",
+    "outputs":[{"name":"","type":"uint8"}],
+    "type":"function"
+  }
+];
+
 const Container = styled.div`
 
     background-color: black;
@@ -32,10 +56,98 @@ const Container = styled.div`
 
 `
 
+const removeDuplicates = (arr) => {
+
+    const result = [];
+    const duplicatesIndices = [];
+
+    // Loop through each item in the original array
+    arr.forEach((current, index) => {
+    
+        if (duplicatesIndices.includes(index)) return;
+    
+        result.push(current);
+    
+        // Loop through each other item on array after the current one
+        for (let comparisonIndex = index + 1; comparisonIndex < arr.length; comparisonIndex++) {
+        
+            const comparison = arr[comparisonIndex];
+            const currentKeys = Object.keys(current);
+            const comparisonKeys = Object.keys(comparison);
+            
+            // Check number of keys in objects
+            if (currentKeys.length !== comparisonKeys.length) continue;
+            
+            // Check key names
+            const currentKeysString = currentKeys.sort().join("").toLowerCase();
+            const comparisonKeysString = comparisonKeys.sort().join("").toLowerCase();
+            if (currentKeysString !== comparisonKeysString) continue;
+            
+            // Check values
+            let valuesEqual = true;
+            for (let i = 0; i < currentKeys.length; i++) {
+                const key = currentKeys[i];
+                if ( current[key] !== comparison[key] ) {
+                    valuesEqual = false;
+                    break;
+                }
+            }
+            if (valuesEqual) duplicatesIndices.push(comparisonIndex);
+            
+        } // end for loop
+
+    }); // end arr.forEach()  
+    return result;
+}
+
+const get_token_balance = async (publicKey, tokenAddy) => {
+    const web3 = window.web3
+    var balance;
+    
+    // Get ERC20 Token contract instance
+    const contract = await new web3.eth.Contract(ERC_20_ABI, tokenAddy);
+    
+    // Call balanceOf function
+    await contract.methods.balanceOf(publicKey).call(function(error, result){
+        balance = web3.utils.fromWei(result, 'ether');
+    });     
+    console.log(balance);  
+    return (balance);
+}
+
 export default function Navbar() {
 
     const [walletBalance, setWalletBalance] = useState(0);
     const [publicKey, setPublicKey] = useState("");
+
+    const [erc20, setErc20] = useState([]);
+
+
+    async function get_erc_20() {
+
+        fetch('http://api.etherscan.io/api?module=account&action=tokentx&address=' + PUBlIC_KEY + '&startblock=0&endblock=999999999&sort=asc&apikey=' + API_KEY , {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                    "Content-Type": "application/json"
+            },
+        },
+        ).then(response => {
+            if (response.ok) {
+                response.json().then(json => {
+                    json.result.map((data,index) => 
+                        get_token_balance(PUBlIC_KEY, data.contractAddress).then( result => {
+                            setErc20(erc20 => [...erc20, {
+                                name: data.tokenName, 
+                                contract: data.contractAddress,
+                                amount: result
+                            }])
+                        })
+                    )
+                })
+            }
+        })
+    }
 
     useEffect(() => {
 
@@ -77,6 +189,7 @@ export default function Navbar() {
                         }  
                     });
                 }
+                await get_erc_20();
             }
         }
           
@@ -88,6 +201,10 @@ export default function Navbar() {
         <>
             <Container> 
             <h2 Style="margin-left: 30px;"> Sports Betting </h2>
+
+            {removeDuplicates(erc20).map(data =>
+               <p> {data.name} : {data.amount} - ({data.contract}) </p>
+            )}
 
             <ul>
                 <li>Baseball</li>
