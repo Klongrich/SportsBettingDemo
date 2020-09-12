@@ -12,6 +12,7 @@ const Container = styled.div`
     border: 2px solid white;
     border-radius: 10px;
 
+    width: 950px;
 
     ul{
         list-style-type: none;
@@ -38,12 +39,19 @@ const BetContainer = styled.div`
     text-align: center;
 
     margin-top: 10px;
+
     li {
         margin-top: -10px;
         padding-bottom: 10px;
     }
 
     &:hover {
+        color: white;
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    :focus & {
         color: white;
         opacity: 1;
         cursor: pointer;
@@ -68,7 +76,6 @@ const BetButton = styled.div`
 
     margin-right: 20px;
 
-    margin-top: 123px;
     padding-top: 10px;
     padding-bottom: 14px;
 
@@ -141,9 +148,20 @@ export default function Homepage() {
                     </BetContainer>
                 </ul>
 
+                <ul>
+                    <li Style="color:#808080;
+                               font-weight:bold;
+                               margin-left: 30px;"> Liqudity </li>
+                    
+                    <li Style="margin-left: 20px;"> ETH: 7.14 </li>
+                
+                </ul>
+
                 <BetButton>
                     Place Bet
                 </BetButton>
+
+
                     </>  
         </Container>
         )}  
