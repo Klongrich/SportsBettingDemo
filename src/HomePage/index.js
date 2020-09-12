@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import styled from "styled-components";
-
-import Web3 from 'web3';
+import Web3 from 'web3'
 
 import NavBar from './Navbar'
 
@@ -38,7 +37,6 @@ const BetContainer = styled.div`
     text-align: center;
 
     margin-top: 10px;
-
     li {
         margin-top: -10px;
         padding-bottom: 10px;
@@ -62,7 +60,7 @@ const BetButton = styled.div`
     height: 20px;
     width: 180px;
 
-    display: inline-block;
+   display: inline-block;
     background-color: green;
 
     text-align: center;
@@ -81,15 +79,41 @@ const BetButton = styled.div`
 
 `
 
+const FootBallData = [
+    {
+        title: "Browns vs Stealer",
+        teamOne: "+130",
+        teamTwo: "-140",
+        teamOneOver: "+7 +140",
+        teamTwoOver: "-7 -120"
+    },
+    {
+        title: "Cavs vs Golden State",
+        teamOne: "+110",
+        teamTwo: "-170",
+        teamOneOver: "+3 +120",
+        teamTwoOver: "-2 -150"
+    },
+    {
+        title: "Jets vs Patroits",
+        teamOne: "+180",
+        teamTwo: "-140",
+        teamOneOver: "+10 +120",
+        teamTwoOver: "-5 -160"
+    }
+]
+
 export default function Homepage() {
-
-
 
     return (
         <>
         <Container>
+
+            {FootBallData.map (data =>
+                
+                <>
             <ul>
-                <li>Browns vs Stealers </li>
+                <li>{data.title} </li>
                 <li>Team One:</li>
                 <li Style="margin-top: 10px;">Team Two:</li>
             </ul>
@@ -98,11 +122,11 @@ export default function Homepage() {
                 <li>Money Line </li>
 
                 <BetContainer>
-                    <li> +130</li>
+                    <li> {data.teamOne} </li>
                 </BetContainer>
 
                 <BetContainer>
-                    <li> -120 </li>
+                    <li> {data.teamTwo} </li>
                 </BetContainer>
             </ul>
 
@@ -110,17 +134,19 @@ export default function Homepage() {
                 <li>Over / Under </li>
 
                 <BetContainer>
-                    <li>+7 +140</li>
+                    <li> {data.teamOneOver} </li>
                 </BetContainer>
 
                 <BetContainer>
-                    <li>-7 -120</li>
+                    <li> {data.teamTwoOver} </li>
                 </BetContainer>
             </ul>
 
             <BetButton>
                 Place Bet
             </BetButton>
+                </>
+          )}    
         </Container>
         </>
     )

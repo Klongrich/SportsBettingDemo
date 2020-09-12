@@ -199,25 +199,19 @@ export default function Navbar() {
 
     }, [])
 
-    function switchPage(page){
-
-        setPageState(page);
-
-    }
-
         return (
             <>
                 <Container> 
-                <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
-                <ul>
-                    <li>Baseball</li>
-                    <li>MMA</li>
-                    <li>E-Sports</li>
-                    <li> Wallet Balance: {walletBalance} ETH </li>
-                </ul>
+                {removeDuplicates(erc20).map(data =>
+                
+                <p> {data.name} : {data.amount} - ({data.contract}) </p>
+            
+            )}
+
                 </Container>      
             </>
         )
 
+    
 }
