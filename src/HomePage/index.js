@@ -7,10 +7,11 @@ import NavBar from './Navbar'
 
 const Container = styled.div`
 
-    margin-top: -100px;
+    margin-top: 100px;
 
     border: 2px solid white;
     border-radius: 10px;
+
 
     ul{
         list-style-type: none;
@@ -79,7 +80,7 @@ const BetButton = styled.div`
 
 `
 
-const FootBallData = [
+const BettingData = [
     {
         title: "Browns vs Stealer",
         teamOne: "+130",
@@ -107,47 +108,45 @@ export default function Homepage() {
 
     return (
         <>
-        <Container>
-
-            {FootBallData.map (data =>
-                
+        {BettingData.map (data =>
+        <Container> 
                 <>
-            <ul>
-                <li>{data.title} </li>
-                <li>Team One:</li>
-                <li Style="margin-top: 10px;">Team Two:</li>
-            </ul>
+                <ul>
+                    <li>{data.title} </li>
+                    <li>Team One:</li>
+                    <li Style="margin-top: 10px;">Team Two:</li>
+                </ul>
 
-            <ul>
-                <li>Money Line </li>
+                <ul>
+                    <li>Money Line </li>
 
-                <BetContainer>
-                    <li> {data.teamOne} </li>
-                </BetContainer>
+                    <BetContainer>
+                        <li> {data.teamOne} </li>
+                    </BetContainer>
 
-                <BetContainer>
-                    <li> {data.teamTwo} </li>
-                </BetContainer>
-            </ul>
+                    <BetContainer>
+                        <li> {data.teamTwo} </li>
+                    </BetContainer>
+                </ul>
 
-            <ul>
-                <li>Over / Under </li>
+                <ul>
+                    <li>Over / Under </li>
 
-                <BetContainer>
-                    <li> {data.teamOneOver} </li>
-                </BetContainer>
+                    <BetContainer>
+                        <li> {data.teamOneOver} </li>
+                    </BetContainer>
 
-                <BetContainer>
-                    <li> {data.teamTwoOver} </li>
-                </BetContainer>
-            </ul>
+                    <BetContainer>
+                        <li> {data.teamTwoOver} </li>
+                    </BetContainer>
+                </ul>
 
-            <BetButton>
-                Place Bet
-            </BetButton>
-                </>
-          )}    
+                <BetButton>
+                    Place Bet
+                </BetButton>
+                    </>  
         </Container>
+        )}  
         </>
     )
 

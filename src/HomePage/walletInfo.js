@@ -56,6 +56,15 @@ const Container = styled.div`
 
 `
 
+export function testing() {
+
+    return (
+        <>
+            <p>Hello world</p>
+        </>
+    )
+}
+
 const removeDuplicates = (arr) => {
 
     const result = [];
@@ -115,17 +124,46 @@ const get_token_balance = async (publicKey, tokenAddy) => {
     return (balance);
 }
 
-export default function Navbar() {
+export async function getWalletAmount(){
 
-    const [walletBalance, setWalletBalance] = useState(0);
-    const [publicKey, setPublicKey] = useState("");
+    async function loadWeb3() {
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum)
+            await window.ethereum.enable()
+            return(true);
+        }
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider)
+            return(true);
+        }
+        else {
+            window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
+            return(false);
+        }
+    }
 
-    const [pageState, setPageState] = useState("Home");
+    var wallet = await loadWeb3();
+      
+    if (wallet) {
 
-    const [erc20, setErc20] = useState([]);
+        const web3 = window.web3
 
+        const accounts = await web3.eth.getAccounts()
+        const address = {account: accounts[0]}.account;
 
-    async function get_erc_20() {
+        if (address) {
+            
+                web3.eth.getBalance(address, function (error, wei) {
+                    if (!error) {
+                        var balance = web3.utils.fromWei(wei, 'ether');
+                        return ( <> {balance} </>);
+                    }  
+                });
+            }
+    }
+}
+
+export async function get_erc_20() {
 
         fetch('http://api.etherscan.io/api?module=account&action=tokentx&address=' + PUBlIC_KEY + '&startblock=0&endblock=999999999&sort=asc&apikey=' + API_KEY , {
             method: 'GET',
@@ -139,79 +177,14 @@ export default function Navbar() {
                 response.json().then(json => {
                     json.result.map((data,index) => 
                         get_token_balance(PUBlIC_KEY, data.contractAddress).then( result => {
-                            setErc20(erc20 => [...erc20, {
-                                name: data.tokenName, 
-                                contract: data.contractAddress,
-                                amount: result
-                            }])
+                            // setErc20(erc20 => [...erc20, {
+                            //     name: data.tokenName, 
+                            //     contract: data.contractAddress,
+                            //     amount: result
+                            // }])
                         })
                     )
                 })
             }
         })
-    }
-
-    useEffect(() => {
-
-        async function loadWeb3() {
-            if (window.ethereum) {
-                window.web3 = new Web3(window.ethereum)
-                await window.ethereum.enable()
-                return(true);
-            }
-            else if (window.web3) {
-                window.web3 = new Web3(window.web3.currentProvider)
-                return(true);
-            }
-            else {
-                window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!')
-                return(false);
-            }
-        }
-
-        async function getWalletData () {
-
-            var wallet = await loadWeb3();
-          
-            if (wallet) {
-                const web3 = window.web3
-
-                const accounts = await web3.eth.getAccounts()
-                const address = {account: accounts[0]}.account;
-
-                setPublicKey(address);
-
-                if (address) {
-                
-                    web3.eth.getBalance(address, function (error, wei) {
-                        if (!error) {
-                            var balance = web3.utils.fromWei(wei, 'ether');
-                            setWalletBalance(balance.substring(0,4));
-                            console.log(balance + " ETH");
-                        }  
-                    });
-                }
-                await get_erc_20();
-            }
-        }
-          
-        getWalletData();
-
-    }, [])
-
-        return (
-            <>
-                <Container> 
-
-                {removeDuplicates(erc20).map(data =>
-                
-                <p> {data.name} : {data.amount} - ({data.contract}) </p>
-            
-            )}
-
-                </Container>      
-            </>
-        )
-
-    
 }
