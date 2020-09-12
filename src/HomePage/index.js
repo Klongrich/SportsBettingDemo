@@ -4,6 +4,8 @@ import Web3 from 'web3'
 
 import NavBar from './Navbar'
 
+import {FootballData, MMAData, EsportsData} from './data'
+
 
 const Container = styled.div`
 
@@ -87,42 +89,25 @@ const BetButton = styled.div`
 
 `
 
-const BettingData = [
-    {
-        title: "Browns vs Stealer",
-        teamOne: "+130",
-        teamTwo: "-140",
-        teamOneOver: "+7 +140",
-        teamTwoOver: "-7 -120"
-    },
-    {
-        title: "Cavs vs Golden State",
-        teamOne: "+110",
-        teamTwo: "-170",
-        teamOneOver: "+3 +120",
-        teamTwoOver: "-2 -150"
-    },
-    {
-        title: "Jets vs Patroits",
-        teamOne: "+180",
-        teamTwo: "-140",
-        teamOneOver: "+10 +120",
-        teamTwoOver: "-5 -160"
-    }
-]
-
 export default function Homepage() {
+
+    const [BettingData, setBettingData] = useState(FootballData)
 
     return (
         <>
         {BettingData.map (data =>
         <Container> 
                 <>
-                <ul>
-                    <li>{data.title} </li>
+
+              
+                <ul Style="width: 220px;">
+                    <li Style="Color: #b0b0b0; 
+                               font-weight: bold;
+                               text-decoration: underline">{data.title} </li>
                     <li>Team One:</li>
                     <li Style="margin-top: 10px;">Team Two:</li>
                 </ul>
+           
 
                 <ul>
                     <li>Money Line </li>
@@ -151,9 +136,9 @@ export default function Homepage() {
                 <ul>
                     <li Style="color:#808080;
                                font-weight:bold;
-                               margin-left: 30px;"> Liqudity </li>
+                               margin-left: 10px;"> Liqudity </li>
                     
-                    <li Style="margin-left: 20px;"> ETH: 7.14 </li>
+                    <li Style="margin-left: 9px;"> ETH: 7.14 </li>
                 
                 </ul>
 
