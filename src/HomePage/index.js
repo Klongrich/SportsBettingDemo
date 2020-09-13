@@ -4,12 +4,16 @@ import Web3 from 'web3'
 import {FootballData, MMAData, EsportsData} from './data'
 import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 
-import box from './Box.json'
+import box from './ABI/Box.json'
+import betting from './ABI/Betting.json'
 
 export default function Homepage() {
 
     const [BettingData, setBettingData] = useState(FootballData);
     const [walletAmount, setWalletAmount] = useState(0);
+    const [pageState, setPageState] = useState("Home");
+
+    const [currentBets, setCurrentBets] = useState("No Current Bets");
 
     async function getWalletAmount(){
 
@@ -48,35 +52,79 @@ export default function Homepage() {
 
                     
                 }
-
-            const Ethaccounts = await web3.eth.getAccounts()
-
-            const boxData = box.networks[3]
-    
-            const abi = box.abi;
-            const Contractaddress = box.networks[3].address;
-            const Box = new web3.eth.Contract(abi, Contractaddress);
-
-            var balance;  
-
-            await Box.methods.store('42').send({from: Ethaccounts[0]})
-             .once('receipt', (receipt) => {
-               console.log(receipt);
-            })
-
-            console.log(Contractaddress);
-            
-            await Box.methods.retrieve().call(function(error, result){
-                console.log(result);
-            });   
-
         }
     }
+
+    async function sumbit_number(number){
+
+        const web3 = window.web3
+
+        const Ethaccounts = await web3.eth.getAccounts()
+
+        const boxData = box.networks[3]
+
+        const abi = box.abi;
+        const Contractaddress = box.networks[3].address;
+        const Box = new web3.eth.Contract(abi, Contractaddress);
+
+        await Box.methods.store(number).send({from: Ethaccounts[0]})
+         .once('receipt', (receipt) => {
+           console.log(receipt);
+        })
+
+        console.log(Contractaddress);
+        
+        await Box.methods.retrieve().call(function(error, result){
+            console.log(result);
+        });   
+    }
+
+    async function get_bets(){
+
+        const web3 = window.web3;
+
+        const Ethaccounts = await web3.eth.getAccounts();
+
+        const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
+
+        var current_bet;
+
+        await Betting.methods.getAmountOfBetOne().call(function (error, result){
+            current_bet = web3.utils.fromWei(result, 'ether')
+            console.log(result);
+            setCurrentBets(current_bet);
+        });
+
+        setPageState("Bets");
+
+    }
+
+    async function submit_bet(amount) {
+
+        const web3 = window.web3;
+
+        const Ethaccounts = await web3.eth.getAccounts();
+
+        const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
+
+        //Betting on '1' uses team one that the player is betting on
+        await Betting.methods.bet(1).send({from: Ethaccounts[0], value: amount})
+        .once('receipt', (receipt) => {
+            console.log(receipt);
+            console.log("transaction hash" + receipt.transactionHash);
+        })
+
+        await Betting.methods.getAmountOfBetOne().call(function (error, result){
+            console.log(result);
+        });
+    }
+
 
     useEffect(() => {
         getWalletAmount();
     });
 
+    if (pageState == "Home") {
     return (
         <>
 
@@ -88,7 +136,7 @@ export default function Homepage() {
                 <li onClick={() => setBettingData(FootballData)}>Football</li>
                 <li onClick={() => setBettingData(MMAData)}> MMA </li>
                 <li onClick={() => setBettingData(EsportsData)}> E-Sports</li>
-                <li> Wallet Balance: {walletAmount} ETH </li>
+                <li onClick={() => get_bets()}> Wallet Balance: {walletAmount} ETH </li>
             </ul>
 
         </HeaderContainer> 
@@ -139,7 +187,7 @@ export default function Homepage() {
                 
                 </ul>
 
-                <BetButton>
+                <BetButton onClick={() => submit_bet(100000000000000000)}>
                     Place Bet
                 </BetButton>
 
@@ -153,5 +201,27 @@ export default function Homepage() {
         </div>
         </>
     )
+    } else {
+
+        return (
+            <>
+                <HeaderContainer Style="margin-top: -100px"> 
+
+                <h2 Style="margin-left: 30px;"> Sports Betting </h2>
+
+                <ul>
+                    <li onClick={() => setBettingData(FootballData)}>Football</li>
+                    <li onClick={() => setBettingData(MMAData)}> MMA </li>
+                    <li onClick={() => setBettingData(EsportsData)}> E-Sports</li>
+                    <li onClick={() => setPageState("Home")}> Wallet Balance: {walletAmount} ETH </li>
+                </ul>
+
+                </HeaderContainer> 
+
+                 <p Style="padding-top: 200px">Current Bets: </p>
+                 <p>Amount Bet On Team One: {currentBets} ETH </p>
+            </>
+        )
+    }
 
 }
