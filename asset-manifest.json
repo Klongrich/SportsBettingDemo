@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/SportsBettingDemo/static/css/main.5f361e03.chunk.css",
-    "main.js": "/SportsBettingDemo/static/js/main.9a410c85.chunk.js",
-    "main.js.map": "/SportsBettingDemo/static/js/main.9a410c85.chunk.js.map",
+    "main.js": "/SportsBettingDemo/static/js/main.0a702400.chunk.js",
+    "main.js.map": "/SportsBettingDemo/static/js/main.0a702400.chunk.js.map",
     "runtime-main.js": "/SportsBettingDemo/static/js/runtime-main.97c27446.js",
     "runtime-main.js.map": "/SportsBettingDemo/static/js/runtime-main.97c27446.js.map",
-    "static/js/2.20140a71.chunk.js": "/SportsBettingDemo/static/js/2.20140a71.chunk.js",
-    "static/js/2.20140a71.chunk.js.map": "/SportsBettingDemo/static/js/2.20140a71.chunk.js.map",
+    "static/js/2.aa65fe7c.chunk.js": "/SportsBettingDemo/static/js/2.aa65fe7c.chunk.js",
+    "static/js/2.aa65fe7c.chunk.js.map": "/SportsBettingDemo/static/js/2.aa65fe7c.chunk.js.map",
     "index.html": "/SportsBettingDemo/index.html",
-    "precache-manifest.34f3f8213fd099ea85f4d2449356b0e8.js": "/SportsBettingDemo/precache-manifest.34f3f8213fd099ea85f4d2449356b0e8.js",
+    "precache-manifest.e108258f64ca548e4ad2d462f6ea0c6d.js": "/SportsBettingDemo/precache-manifest.e108258f64ca548e4ad2d462f6ea0c6d.js",
     "service-worker.js": "/SportsBettingDemo/service-worker.js",
     "static/css/main.5f361e03.chunk.css.map": "/SportsBettingDemo/static/css/main.5f361e03.chunk.css.map",
-    "static/js/2.20140a71.chunk.js.LICENSE.txt": "/SportsBettingDemo/static/js/2.20140a71.chunk.js.LICENSE.txt",
+    "static/js/2.aa65fe7c.chunk.js.LICENSE.txt": "/SportsBettingDemo/static/js/2.aa65fe7c.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/SportsBettingDemo/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.97c27446.js",
-    "static/js/2.20140a71.chunk.js",
+    "static/js/2.aa65fe7c.chunk.js",
     "static/css/main.5f361e03.chunk.css",
-    "static/js/main.9a410c85.chunk.js"
+    "static/js/main.0a702400.chunk.js"
   ]
 }
