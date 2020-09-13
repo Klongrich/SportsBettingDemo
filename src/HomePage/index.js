@@ -4,6 +4,8 @@ import Web3 from 'web3'
 import {FootballData, MMAData, EsportsData} from './data'
 import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 
+import box from './Box.json'
+
 export default function Homepage() {
 
     const [BettingData, setBettingData] = useState(FootballData);
@@ -43,7 +45,31 @@ export default function Homepage() {
                             setWalletAmount(balance.substring(0,4));
                         }  
                     });
+
+                    
                 }
+
+            const Ethaccounts = await web3.eth.getAccounts()
+
+            const boxData = box.networks[3]
+    
+            const abi = box.abi;
+            const Contractaddress = box.networks[3].address;
+            const Box = new web3.eth.Contract(abi, Contractaddress);
+
+            var balance;  
+
+            await Box.methods.store('42').send({from: Ethaccounts[0]})
+             .once('receipt', (receipt) => {
+               console.log(receipt);
+            })
+
+            console.log(Contractaddress);
+            
+            await Box.methods.retrieve().call(function(error, result){
+                console.log(result);
+            });   
+
         }
     }
 
