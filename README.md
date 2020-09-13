@@ -1,4 +1,4 @@
-Live Demo: https://klongrich.github.io/SportsBettingDemo/
+### Live Demo: https://klongrich.github.io/SportsBettingDemo/
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
