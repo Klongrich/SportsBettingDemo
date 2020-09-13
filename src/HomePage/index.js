@@ -77,6 +77,7 @@ const BetButton = styled.div`
     text-align: center;
 
     margin-right: 20px;
+    margin-bottom: 30px;
 
     padding-top: 10px;
     padding-bottom: 14px;
@@ -88,6 +89,40 @@ const BetButton = styled.div`
     }
 
 `
+const HeaderContainer = styled.div`
+
+    background-color: black;
+    color: white;
+
+    height: 55px;
+    width: 100%;
+
+    border-bottom: 1px solid white;
+    border-top: 1px solid black;
+
+    h2 {
+        text-align:left;
+        font-size: 24px;
+    }
+
+    ul{
+        list-style-type: none;
+        margin-left: 710px;
+        margin-top: -40px;
+    }
+
+    li {
+        float: left;
+        padding-left: 42px;
+        font-size: 16px;
+    }
+
+    li:hover{
+        color: red;
+        cursor: pointer;
+    }
+
+`
 
 export default function Homepage() {
 
@@ -95,17 +130,30 @@ export default function Homepage() {
 
     return (
         <>
-        {BettingData.map (data =>
-        <Container> 
-                <>
 
-              
-                <ul Style="width: 220px;">
+        <HeaderContainer> 
+
+            <h2 Style="margin-left: 30px;"> Sports Betting </h2>
+
+            <ul>
+                <li onClick={() => setBettingData(FootballData)}>Football</li>
+                <li onClick={() => setBettingData(MMAData)}> MMA </li>
+                <li onClick={() => setBettingData(EsportsData)}> E-Sports</li>
+                <li> Wallet Balance: 1.08 ETH </li>
+            </ul>
+
+        </HeaderContainer> 
+
+        {BettingData.map (data =>
+
+        <Container> 
+                <>    
+                <ul Style="width: 240px;">
                     <li Style="Color: #b0b0b0; 
                                font-weight: bold;
                                text-decoration: underline">{data.title} </li>
-                    <li>Team One:</li>
-                    <li Style="margin-top: 10px;">Team Two:</li>
+                    <li> {data.teamOne} </li>
+                    <li Style="margin-top: 10px;"> {data.teamTwo} </li>
                 </ul>
            
 
@@ -113,11 +161,11 @@ export default function Homepage() {
                     <li>Money Line </li>
 
                     <BetContainer>
-                        <li> {data.teamOne} </li>
+                        <li> {data.teamOneOdds} </li>
                     </BetContainer>
 
                     <BetContainer>
-                        <li> {data.teamTwo} </li>
+                        <li> {data.teamTwoOdds} </li>
                     </BetContainer>
                 </ul>
 
@@ -138,7 +186,7 @@ export default function Homepage() {
                                font-weight:bold;
                                margin-left: 10px;"> Liqudity </li>
                     
-                    <li Style="margin-left: 9px;"> ETH: 7.14 </li>
+                    <li Style="margin-left: 9px;"> ETH: {data.liquidity}</li>
                 
                 </ul>
 
@@ -147,9 +195,15 @@ export default function Homepage() {
                 </BetButton>
 
 
-                    </>  
+                </>  
         </Container>
+
+        
         )}  
+
+                <div Style="padding-top: 150px;">
+                    <p> Footer Here </p>
+                </div>
         </>
     )
 

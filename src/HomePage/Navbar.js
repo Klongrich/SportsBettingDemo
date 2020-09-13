@@ -31,6 +31,8 @@ const Container = styled.div`
     }
 
 `
+
+
 export default function Navbar() {
 
     const [walletAmount, setWalletAmount] = useState(0);

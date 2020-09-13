@@ -8,7 +8,6 @@ import NavBar from './HomePage/Navbar'
 function App() {
   return (
     <>
-    <NavBar />
     <div className="App">
       <header className="App-header">
         <HomePage />
