@@ -55,7 +55,7 @@ export default function Homepage() {
         }
     }
 
-    async function sumbit_number(number){
+    async function submit_number(number){
 
         const web3 = window.web3
 
@@ -142,7 +142,7 @@ export default function Homepage() {
         </HeaderContainer>
 
         {BettingData.map (data =>
-        
+
         <Container>
                 <>
                 <ul Style="width: 240px;">
