@@ -31,26 +31,26 @@ export default function Homepage() {
                 return(false);
             }
         }
-    
+
         var wallet = await loadWeb3();
-          
+
         if (wallet) {
-    
+
             const web3 = window.web3
-    
+
             const accounts = await web3.eth.getAccounts()
             const address = {account: accounts[0]}.account;
-    
+
             if (address) {
-                
+
                     web3.eth.getBalance(address, function (error, wei) {
                         if (!error) {
                             var balance = web3.utils.fromWei(wei, 'ether');
                             setWalletAmount(balance.substring(0,4));
-                        }  
+                        }
                     });
 
-                    
+
                 }
         }
     }
@@ -73,10 +73,10 @@ export default function Homepage() {
         })
 
         console.log(Contractaddress);
-        
+
         await Box.methods.retrieve().call(function(error, result){
             console.log(result);
-        });   
+        });
     }
 
     async function get_bets(){
@@ -128,7 +128,7 @@ export default function Homepage() {
     return (
         <>
 
-        <HeaderContainer> 
+        <HeaderContainer>
 
             <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
@@ -139,20 +139,20 @@ export default function Homepage() {
                 <li onClick={() => get_bets()}> Wallet Balance: {walletAmount} ETH </li>
             </ul>
 
-        </HeaderContainer> 
+        </HeaderContainer>
 
         {BettingData.map (data =>
-
-        <Container> 
-                <>    
+        
+        <Container>
+                <>
                 <ul Style="width: 240px;">
-                    <li Style="Color: #b0b0b0; 
+                    <li Style="Color: #b0b0b0;
                                font-weight: bold;
                                text-decoration: underline">{data.title} </li>
                     <li> {data.teamOne} </li>
                     <li Style="margin-top: 10px;"> {data.teamTwo} </li>
                 </ul>
-           
+
 
                 <ul>
                     <li>Money Line </li>
@@ -182,9 +182,9 @@ export default function Homepage() {
                     <li Style="color:#808080;
                                font-weight:bold;
                                margin-left: 10px;"> Liqudity </li>
-                    
+
                     <li Style="margin-left: 9px;"> ETH: {data.liquidity}</li>
-                
+
                 </ul>
 
                 <BetButton onClick={() => submit_bet(100000000000000000)}>
@@ -192,9 +192,9 @@ export default function Homepage() {
                 </BetButton>
 
 
-                </>  
+                </>
         </Container>
-        )}  
+        )}
 
         <div Style="padding-top: 150px;">
             <p> Footer Here </p>
@@ -205,7 +205,7 @@ export default function Homepage() {
 
         return (
             <>
-                <HeaderContainer Style="margin-top: -100px"> 
+                <HeaderContainer Style="margin-top: -100px">
 
                 <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
@@ -216,7 +216,7 @@ export default function Homepage() {
                     <li onClick={() => setPageState("Home")}> Wallet Balance: {walletAmount} ETH </li>
                 </ul>
 
-                </HeaderContainer> 
+                </HeaderContainer>
 
                  <p Style="padding-top: 200px">Current Bets: </p>
                  <p>Amount Bet On Team One: {currentBets} ETH </p>
