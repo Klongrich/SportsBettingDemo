@@ -55,30 +55,6 @@ export default function Homepage() {
         }
     }
 
-    async function sumbit_number(number){
-
-        const web3 = window.web3
-
-        const Ethaccounts = await web3.eth.getAccounts()
-
-        const boxData = box.networks[3]
-
-        const abi = box.abi;
-        const Contractaddress = box.networks[3].address;
-        const Box = new web3.eth.Contract(abi, Contractaddress);
-
-        await Box.methods.store(number).send({from: Ethaccounts[0]})
-         .once('receipt', (receipt) => {
-           console.log(receipt);
-        })
-
-        console.log(Contractaddress);
-        
-        await Box.methods.retrieve().call(function(error, result){
-            console.log(result);
-        });   
-    }
-
     async function get_bets(){
 
         const web3 = window.web3;
@@ -190,8 +166,6 @@ export default function Homepage() {
                 <BetButton onClick={() => submit_bet(100000000000000000)}>
                     Place Bet
                 </BetButton>
-
-
                 </>  
         </Container>
         )}  
@@ -219,7 +193,7 @@ export default function Homepage() {
                 </HeaderContainer> 
 
                  <p Style="padding-top: 200px">Current Bets: </p>
-                 <p>Amount Bet On Team One: {currentBets} ETH </p>
+                 <p> Amount Bet On Team One: {currentBets} ETH </p>
             </>
         )
     }
