@@ -1,10 +1,70 @@
 import React, {useState, useEffect} from 'react'
 import Web3 from 'web3'
+import styled from "styled-components";
+
 
 import {FootballData, MMAData, EsportsData} from './data'
 import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 
 import betting from './ABI/Betting.json'
+
+const StakingContainer = styled.div`
+
+    border: 3px solid black;
+    border-radius: 15px;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    float: left;
+
+`
+
+const StakingBox = styled.div`
+
+    border: 3px solid black;
+    border-radius: 15px;
+    padding-top: 20px;
+    padding-bottom: 140px;
+
+    width: 350px;
+
+    display: inline-block;
+
+    margin-left: 30px;
+
+`
+
+export const StakingButton = styled.div`
+
+    border: 2px solid white;
+    border-radius: 5px;
+
+    opacity: 0.5;
+
+    height: 20px;
+    width: 180px;
+
+    display: inline-block;
+
+    background-color: green;
+
+    text-align: center;
+
+    margin-top: 30px;
+
+    margin-right: 20px;
+    margin-bottom: 30px;
+
+    padding-top: 10px;
+    padding-bottom: 14px;
+
+    &:hover {
+        color: white;
+        opacity: 1;
+        cursor: pointer;
+    }
+
+`
 
 export default function Homepage() {
 
@@ -201,7 +261,7 @@ export default function Homepage() {
 
         return (
             <>
-                <HeaderContainer top="-425px;"> 
+                <HeaderContainer top="0px;"> 
 
                 <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
@@ -214,14 +274,40 @@ export default function Homepage() {
 
                 </HeaderContainer> 
 
-                 <p Style="padding-top: 20px">Current Amount Staked: </p>
-                 <p> Staked: 100.32 ETH </p>
+                 <p Style="padding-top: 0px">Current Amount Staked: </p>
+                 <p Style="margin-top: -10px"> Staked: 100.32 ETH </p>
 
-                 <div>
-                     Payout
-                 </div>
+            <StakingContainer>
+                 <StakingBox>
+                     <p> Payout </p>
 
-                 
+                     <p>714.00 ETH</p>
+                </StakingBox>
+
+                <StakingBox>
+                     <p> Stake </p>
+
+                     <p>Enter Amount: </p>
+                </StakingBox>
+
+
+                <StakingBox>
+                     <p> Unstake </p>
+
+                     <p>Amount Staked: 714.00 ETH</p>
+                </StakingBox>
+            </StakingContainer>
+    
+            <div Style="float: left">
+                <StakingButton>
+                    Payout Test
+                </StakingButton>
+
+                <StakingButton>
+                    Dontae To Fund
+                </StakingButton>
+            </div>
+
             </>
         )
     }
