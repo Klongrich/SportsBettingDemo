@@ -25,7 +25,7 @@ const StakingBox = styled.div`
     border: 3px solid black;
     border-radius: 15px;
     padding-top: 20px;
-    padding-bottom: 140px;
+    padding-bottom: ${props => props.bottom};
 
     width: 350px;
 
@@ -160,11 +160,9 @@ export default function Homepage() {
     async function get_amount_staked() {
 
         const web3 = window.web3;
-
         var balance = await web3.eth.getBalance("0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
         
         console.log(balance / 1000000000000000000);
-
         setAmountStaked(balance / 1000000000000000000)
     }
 
@@ -320,29 +318,27 @@ export default function Homepage() {
 
                 </HeaderContainer> 
 
-                 <p Style="padding-top: 0px">Current Amount Staked: </p>
+                 <p Style="padding-top: 15px">Current Amount Staked: </p>
                  <p Style="margin-top: -10px"> Staked: 100.32 ETH </p>
 
             <StakingContainer>
-                 <StakingBox>
-                     <p> Payout </p>
+                 <StakingBox bottom="80px;">
+                     <h2> Your Payout: </h2>
 
-                     <p>714.00 ETH</p>
+                     <h2>714.00 ETH</h2>
                 </StakingBox>
 
-                <StakingBox>
-                     <p> Stake </p>
+                <StakingBox bottom="80px;">
+                     <h2>Amount Staked: </h2>
 
-                     <p>Amount Staked: </p>
-
-                     <p>{amountStaked} ETH </p>
+                     <h2>{amountStaked} ETH </h2>
                 </StakingBox>
 
 
-                <StakingBox>
-                     <p> Unstake </p>
+                <StakingBox bottom="80px;">
+                     <h2> Your Stake: </h2>
 
-                     <p>Amount Staked: 714.00 ETH</p>
+                     <h2>0.0714 ETH</h2>
                 </StakingBox>
             </StakingContainer>
     
