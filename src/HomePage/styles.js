@@ -93,6 +93,8 @@ export const HeaderContainer = styled.div`
     border-bottom: 1px solid white;
     border-top: 1px solid black;
 
+    margin-top: ${props => props.top};
+
     h2 {
         text-align:left;
         font-size: 24px;
