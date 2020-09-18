@@ -7,6 +7,7 @@ import {FootballData, MMAData, EsportsData} from './data'
 import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 
 import betting from './ABI/Betting.json'
+import staking from './ABI/Staking.json'
 
 const StakingContainer = styled.div`
 
@@ -70,9 +71,12 @@ export default function Homepage() {
 
     const [BettingData, setBettingData] = useState(FootballData);
     const [walletAmount, setWalletAmount] = useState(0);
-    const [pageState, setPageState] = useState("blah");
+    const [pageState, setPageState] = useState("Home");
+
+    const [amountStaked, setAmountStaked] = useState(0);
 
     const [currentBets, setCurrentBets] = useState("No Current Bets");
+
 
     async function getWalletAmount(){
 
@@ -114,12 +118,60 @@ export default function Homepage() {
         }
     }
 
-    async function get_bets(){
+    async function pay_out_staked() {
+
+        const web3 = window.web3
+        const Ethaccounts = await web3.eth.getAccounts();
+        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+
+        await Staking.methods.pay_out().send({from: Ethaccounts[0]})
+        .once('receipt', (receipt) => {
+            console.log(receipt);
+        })
+
+    }
+
+    async function submit_stake(){
+
+        const web3 = window.web3
+        const Ethaccounts = await web3.eth.getAccounts();
+        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+
+        await Staking.methods.deposit().send({from: Ethaccounts[0], value:100000000000000000})
+        .once('receipt', (receipt) => {
+            console.log(receipt);
+            console.log("transaction hash" + receipt.transactionHash);
+        })
+    }
+
+    async function submit_donation(){
+
+        const web3 = window.web3
+        const Ethaccounts = await web3.eth.getAccounts();
+        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+
+        await Staking.methods.donate().send({from: Ethaccounts[0], value:100000000000000000})
+        .once('receipt', (receipt) => {
+            console.log(receipt);
+            console.log("transaction hash" + receipt.transactionHash);
+        })
+    }
+
+    async function get_amount_staked() {
 
         const web3 = window.web3;
 
-        const Ethaccounts = await web3.eth.getAccounts();
+        var balance = await web3.eth.getBalance("0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+        
+        console.log(balance / 1000000000000000000);
 
+        setAmountStaked(balance / 1000000000000000000)
+    }
+
+    async function get_bets(){
+
+        const web3 = window.web3;
+        const Ethaccounts = await web3.eth.getAccounts();
         const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
 
         var current_bet;
@@ -137,9 +189,7 @@ export default function Homepage() {
     async function submit_bet(amount) {
 
         const web3 = window.web3;
-
         const Ethaccounts = await web3.eth.getAccounts();
-
         const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
 
         //Betting on '1' uses team one that the player is betting on
@@ -157,14 +207,13 @@ export default function Homepage() {
 
     useEffect(() => {
         getWalletAmount();
-    });
+        get_amount_staked();
+    }, []);
 
-    async function payout_one(){
+    async function payout_bets(){
 
         const web3 = window.web3;
-
         const Ethaccounts = await web3.eth.getAccounts();
-
         const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
 
         //Betting on '1' uses team one that the player is betting on
@@ -172,9 +221,6 @@ export default function Homepage() {
         .once('receipt', (receipt) => {
             console.log(receipt);
         })
-
-
-
     }
 
     if (pageState == "Home") {
@@ -248,7 +294,7 @@ export default function Homepage() {
 
         )}  
 
-            <h2 onClick={() => payout_one()}> Payout One Test </h2>
+            <h2 onClick={() => payout_bets()}> Payout One Test </h2>
             <h2> Payout Two Test </h2>
 
 
@@ -266,9 +312,9 @@ export default function Homepage() {
                 <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
                 <ul>
-                    <li onClick={() => setBettingData(FootballData)}>Football</li>
-                    <li onClick={() => setBettingData(MMAData)}> MMA </li>
-                    <li onClick={() => get_bets()}> E-Sports</li>
+                    <li onClick={() => setPageState("Home")}>Football</li>
+                    <li onClick={() => setPageState("Home")}> MMA </li>
+                    <li onClick={() => setPageState("Home")}> Staking </li>
                     <li onClick={() => setPageState("Home")}> Wallet Balance: {walletAmount} ETH </li>
                 </ul>
 
@@ -287,7 +333,9 @@ export default function Homepage() {
                 <StakingBox>
                      <p> Stake </p>
 
-                     <p>Enter Amount: </p>
+                     <p>Amount Staked: </p>
+
+                     <p>{amountStaked} ETH </p>
                 </StakingBox>
 
 
@@ -299,12 +347,17 @@ export default function Homepage() {
             </StakingContainer>
     
             <div Style="float: left">
-                <StakingButton>
+                <StakingButton onClick={() => pay_out_staked()}>
                     Payout Test
                 </StakingButton>
 
-                <StakingButton>
+                <StakingButton onClick={() => submit_donation()}>
                     Dontae To Fund
+                </StakingButton>
+
+
+                <StakingButton onClick={() => submit_stake()}>
+                    Stake
                 </StakingButton>
             </div>
 
