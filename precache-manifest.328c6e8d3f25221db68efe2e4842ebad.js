@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "33602b4e936d46cee248e4c1c7758ed2",
+    "revision": "f3734e2f3e9efc5762bcdd18abe7d2f4",
     "url": "/SportsBettingDemo/index.html"
   },
   {
-    "revision": "0333cf2da0d1189eb82d",
+    "revision": "1ae672095ffd019c14bd",
     "url": "/SportsBettingDemo/static/css/main.5f361e03.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/SportsBettingDemo/static/js/2.6a1551dd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "0333cf2da0d1189eb82d",
-    "url": "/SportsBettingDemo/static/js/main.6ee0696d.chunk.js"
+    "revision": "1ae672095ffd019c14bd",
+    "url": "/SportsBettingDemo/static/js/main.201ab3ef.chunk.js"
   },
   {
     "revision": "829c570b286171dbc729",
