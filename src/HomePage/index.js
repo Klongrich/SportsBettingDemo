@@ -9,6 +9,8 @@ import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 import betting from './ABI/Betting.json'
 import staking from './ABI/Staking.json'
 
+const StakingContract = "0x6cFf0b2d01B1e7892f9b66A2D7A39777464aBFc5";
+
 const StakingContainer = styled.div`
 
     border: 3px solid black;
@@ -122,7 +124,7 @@ export default function Homepage() {
 
         const web3 = window.web3
         const Ethaccounts = await web3.eth.getAccounts();
-        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+        const Staking = new web3.eth.Contract(staking.abi, StakingContract);
 
         await Staking.methods.pay_out().send({from: Ethaccounts[0]})
         .once('receipt', (receipt) => {
@@ -135,7 +137,7 @@ export default function Homepage() {
 
         const web3 = window.web3
         const Ethaccounts = await web3.eth.getAccounts();
-        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+        const Staking = new web3.eth.Contract(staking.abi, StakingContract);
 
         await Staking.methods.deposit().send({from: Ethaccounts[0], value:100000000000000000})
         .once('receipt', (receipt) => {
@@ -148,7 +150,7 @@ export default function Homepage() {
 
         const web3 = window.web3
         const Ethaccounts = await web3.eth.getAccounts();
-        const Staking = new web3.eth.Contract(staking.abi, "0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+        const Staking = new web3.eth.Contract(staking.abi, StakingContract);
 
         await Staking.methods.donate().send({from: Ethaccounts[0], value:100000000000000000})
         .once('receipt', (receipt) => {
@@ -160,28 +162,14 @@ export default function Homepage() {
     async function get_amount_staked() {
 
         const web3 = window.web3;
-        var balance = await web3.eth.getBalance("0x882b67Dd7247849a94e7F3Ed8Dac44Dd3e6Ce1Dc");
+        var balance = await web3.eth.getBalance(StakingContract);
         
         console.log(balance / 1000000000000000000);
         setAmountStaked(balance / 1000000000000000000)
     }
 
     async function get_bets(){
-
-        const web3 = window.web3;
-        const Ethaccounts = await web3.eth.getAccounts();
-        const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
-
-        var current_bet;
-
-        await Betting.methods.getAmountOfBetOne().call(function (error, result){
-            current_bet = web3.utils.fromWei(result, 'ether')
-            console.log(result);
-            setCurrentBets(current_bet);
-        });
-
         setPageState("Bets");
-
     }
 
     async function submit_bet(amount) {
@@ -318,8 +306,10 @@ export default function Homepage() {
 
                 </HeaderContainer> 
 
+            <div>
                  <p Style="padding-top: 15px">Current Amount Staked: </p>
                  <p Style="margin-top: -10px"> Staked: 100.32 ETH </p>
+            </div>
 
             <StakingContainer>
                  <StakingBox bottom="80px;">
