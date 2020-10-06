@@ -172,14 +172,15 @@ export default function Homepage() {
         setPageState("Bets");
     }
 
-    async function submit_bet(amount) {
+    async function submit_bet(amount, gameID) {
 
         const web3 = window.web3;
         const Ethaccounts = await web3.eth.getAccounts();
         const Betting = new web3.eth.Contract(betting.abi, "0x7c13890f3D6c625A878118B72f1396eCf72c1e7c");
 
         //Betting on '1' uses team one that the player is betting on
-        await Betting.methods.bet(2).send({from: Ethaccounts[0], value: amount})
+        //Need to add in the ability to use GameIDs
+        await Betting.methods.bet(2, gameID).send({from: Ethaccounts[0], value: amount})
         .once('receipt', (receipt) => {
             console.log(receipt);
             console.log("transaction hash" + receipt.transactionHash);
@@ -272,7 +273,7 @@ export default function Homepage() {
                 
                 </ul>
 
-                <BetButton onClick={() => submit_bet(100000000000000000)}>
+                <BetButton onClick={() => submit_bet(100000000000000000, data.gameID)}>
                     Place Bet
                 </BetButton>
                 </>  

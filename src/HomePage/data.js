@@ -9,7 +9,8 @@ export const FootballData = [
         teamTwoOdds: "-140",
         teamOneOver: "+7 +140",
         teamTwoOver: "-7 -120",
-        liquidity: "7.14"
+        liquidity: "7.14",
+        gameID: "1"
     },
     {
         title: "Cavs vs Golden State",
@@ -19,7 +20,8 @@ export const FootballData = [
         teamTwoOdds: "-170",
         teamOneOver: "+3 +120",
         teamTwoOver: "-2 -150",
-        liquidity: "4.22"
+        liquidity: "4.22",
+        gameID: "2"
     },
     {
         title: "Jets vs Patroits",
@@ -29,7 +31,8 @@ export const FootballData = [
         teamTwoOdds: "-140",
         teamOneOver: "+10 +120",
         teamTwoOver: "-5 -160",
-        liquidity: "6.74"
+        liquidity: "6.74",
+        gameID: "3"
     },
     {
         title: "Browns vs Stealer",
@@ -39,7 +42,8 @@ export const FootballData = [
         teamTwoOdds: "-140",
         teamOneOver: "+7 +140",
         teamTwoOver: "-7 -120",
-        liquidity: "7.82"
+        liquidity: "7.82",
+        gameID: "4"
     }
 ]
 
@@ -52,7 +56,8 @@ export const MMAData = [
         teamTwoOdds: "-170",
         teamOneOver: "+1 +160",
         teamTwoOver: "-2 -170",
-        liquidity: "8.92"
+        liquidity: "8.92",
+        gameID: "5"
     },
     {
         title: "Jones vs. Gustafsson",
@@ -62,7 +67,8 @@ export const MMAData = [
         teamTwoOdds: "-130",
         teamOneOver: "+4 +180",
         teamTwoOver: "-1 -120",
-        liquidity: "7.14"
+        liquidity: "7.14",
+        gameID: "6"
     },
     {
         title: "Diaz vs. McGregor",
@@ -72,7 +78,8 @@ export const MMAData = [
         teamTwoOdds: "-110",
         teamOneOver: "+3 +140",
         teamTwoOver: "-1 -130",
-        liquidity: "9.23"
+        liquidity: "9.23",
+        gameID: "7"
     },
     {
         title: "Hunt vs. Silva",
@@ -82,7 +89,8 @@ export const MMAData = [
         teamTwoOdds: "-120",
         teamOneOver: "+5 +110",
         teamTwoOver: "-5 -140",
-        liquidity: "4.52"
+        liquidity: "4.52",
+        gameID: "8"
     }
 ]
 
@@ -92,27 +100,31 @@ export const EsportsData = [
         teamOne: "+130",
         teamTwo: "-140",
         teamOneOver: "+7 +140",
-        teamTwoOver: "-7 -120"
+        teamTwoOver: "-7 -120",
+        gameID: "9"
     },
     {
         title: "Cavs vs Golden State",
         teamOne: "+110",
         teamTwo: "-170",
         teamOneOver: "+3 +120",
-        teamTwoOver: "-2 -150"
+        teamTwoOver: "-2 -150",
+        gameID: "10"
     },
     {
         title: "Jets vs Patroits",
         teamOne: "+180",
         teamTwo: "-140",
         teamOneOver: "+10 +120",
-        teamTwoOver: "-5 -160"
+        teamTwoOver: "-5 -160",
+        gameID: "11"
     },
     {
         title: "Browns vs Stealer",
         teamOne: "+130",
         teamTwo: "-140",
         teamOneOver: "+7 +140",
-        teamTwoOver: "-7 -120"
+        teamTwoOver: "-7 -120",
+        gameID: "12"
     }
 ]
