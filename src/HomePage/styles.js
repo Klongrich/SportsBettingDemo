@@ -118,3 +118,7 @@ export const HeaderContainer = styled.div`
     }
 
 `
+export const Footer = styled.div`
+
+
+`
