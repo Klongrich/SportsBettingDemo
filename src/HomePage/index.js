@@ -9,6 +9,8 @@ import {Container, BetButton, BetContainer, HeaderContainer} from './styles'
 import betting from './ABI/Betting.json'
 import staking from './ABI/Staking.json'
 
+import Footer from './footer.js'
+
 const StakingContract = "0x6cFf0b2d01B1e7892f9b66A2D7A39777464aBFc5";
 
 const StakingContainer = styled.div`
@@ -96,26 +98,26 @@ export default function Homepage() {
                 return(false);
             }
         }
-    
+
         var wallet = await loadWeb3();
-          
+
         if (wallet) {
-    
+
             const web3 = window.web3
-    
+
             const accounts = await web3.eth.getAccounts()
             const address = {account: accounts[0]}.account;
-    
+
             if (address) {
-                
+
                     web3.eth.getBalance(address, function (error, wei) {
                         if (!error) {
                             var balance = web3.utils.fromWei(wei, 'ether');
                             setWalletAmount(balance.substring(0,4));
-                        }  
+                        }
                     });
 
-                    
+
                 }
         }
     }
@@ -163,7 +165,7 @@ export default function Homepage() {
 
         const web3 = window.web3;
         var balance = await web3.eth.getBalance(StakingContract);
-        
+
         console.log(balance / 1000000000000000000);
         setAmountStaked(balance / 1000000000000000000)
     }
@@ -209,12 +211,20 @@ export default function Homepage() {
             console.log(receipt);
         })
     }
+    // state = {lat: null, errorMessage: ''};
+
+    // componentDidMount() {
+    //     window.navigator.geolocation.getCurrentPosition(
+    //       position => this.setState({ lat: position.coords.latitude }),
+    //       err => this.setState({ errorMessage: err.message })
+    //     );
+    // }
 
     if (pageState == "Home") {
     return (
         <>
 
-        <HeaderContainer> 
+        <HeaderContainer>
 
             <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
@@ -225,20 +235,20 @@ export default function Homepage() {
                 <li onClick={() => get_bets()}> Wallet Balance: {walletAmount} ETH </li>
             </ul>
 
-        </HeaderContainer> 
+        </HeaderContainer>
 
         {BettingData.map (data =>
 
-        <Container> 
-                <>    
+        <Container>
+                <>
                 <ul Style="width: 240px;">
-                    <li Style="Color: #b0b0b0; 
+                    <li Style="Color: #b0b0b0;
                                font-weight: bold;
                                text-decoration: underline">{data.title} </li>
                     <li> {data.teamOne} </li>
                     <li Style="margin-top: 10px;"> {data.teamTwo} </li>
                 </ul>
-           
+
 
                 <ul>
                     <li>Money Line </li>
@@ -268,33 +278,33 @@ export default function Homepage() {
                     <li Style="color:#808080;
                                font-weight:bold;
                                margin-left: 10px;"> Liqudity </li>
-                    
+
                     <li Style="margin-left: 9px;"> ETH: {data.liquidity}</li>
-                
+
                 </ul>
 
                 <BetButton onClick={() => submit_bet(100000000000000000, data.gameID)}>
                     Place Bet
                 </BetButton>
-                </>  
+                </>
         </Container>
 
-        )}  
+        )}
 
             <h2 onClick={() => payout_bets()}> Payout One Test </h2>
             <h2> Payout Two Test </h2>
 
 
-        <div Style="padding-top: 150px;">
-            <p> Footer Here </p>
-        </div>
+        <footer Style="padding-top: 150px;">
+            <Footer />
+        </footer>
         </>
     )
     } else {
 
         return (
             <>
-                <HeaderContainer top="0px;"> 
+                <HeaderContainer top="0px;">
 
                 <h2 Style="margin-left: 30px;"> Sports Betting </h2>
 
@@ -305,7 +315,7 @@ export default function Homepage() {
                     <li onClick={() => setPageState("Home")}> Wallet Balance: {walletAmount} ETH </li>
                 </ul>
 
-                </HeaderContainer> 
+                </HeaderContainer>
 
             <div>
                  <p Style="padding-top: 15px">Current Amount Staked: </p>
@@ -332,7 +342,7 @@ export default function Homepage() {
                      <h2>0.0714 ETH</h2>
                 </StakingBox>
             </StakingContainer>
-    
+
             <div Style="float: left">
                 <StakingButton onClick={() => pay_out_staked()}>
                     Payout Test
