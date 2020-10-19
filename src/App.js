@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import HomePage from './HomePage/index'
-import { FooterContainer } from './footer-folder/containers/footer'
+import { FooterContainer } from './footer-folder/footer'
 
 function App() {
   return (
