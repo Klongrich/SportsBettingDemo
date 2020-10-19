@@ -26,9 +26,8 @@ export function FooterContainer() {
                 <Footer.Column>
                 <Footer.Title>Contact Us</Footer.Title>
                     <Footer.Link href="#"><strike>United States</strike></Footer.Link>
-                    <Footer.Link href="#">United Kingdom</Footer.Link>
-                    <Footer.Link href="#">Australia</Footer.Link>
-                    <Footer.Link href="#">Support</Footer.Link>
+                    <Footer.Link href="#">Europe</Footer.Link>
+                    <Footer.Link href="#">China</Footer.Link>
                 </Footer.Column>
                 <Footer.Column>
                 <Footer.Title>Social</Footer.Title>
