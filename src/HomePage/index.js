@@ -295,9 +295,7 @@ export default function Homepage() {
             <h2> Payout Two Test </h2>
 
 
-        <footer Style="padding-top: 150px;">
-            <Footer />
-        </footer>
+
         </>
     )
     } else {
